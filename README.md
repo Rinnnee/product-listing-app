@@ -53,7 +53,7 @@ Response กลับไป Client
 fetch("https://dummyjson.com/products")
 ```
 
-เราให้ Client เรียก:
+ให้ Client เรียก:
 
 ```ts
 fetch("/api/products")
@@ -68,8 +68,8 @@ fetch("/api/products")
 ## 1️⃣ Clone Repository
 
 ```bash
-git clone https://github.com/your-username/product-app.git
-cd product-app
+git clone https://github.com/Rinnnee/product-listing-app.git
+cd product-listing-app
 ```
 
 ---
@@ -87,7 +87,7 @@ npm install
 สร้างไฟล์ `.env.local`
 
 ```
-NEXT_PUBLIC_BASE_URL=https://dummyjson.com
+BACKEND_URL=https://dummyjson.com
 ```
 
 ---
@@ -135,18 +135,6 @@ GET /api/products/[id]
 
 ## lucide-react
 ใช้สำหรับไอคอน เช่น ArrowLeft
-
----
-
-# 🛠 Known Limitations
-
-- ❌ ยังไม่มีระบบ Authentication
-- ❌ ยังไม่มี Cart System
-- ❌ ยังไม่มี Pagination
-- ❌ ยังไม่มี Filter / Sorting
-- ❌ ยังไม่มี Unit Test
-- ❌ ยังไม่มี Global Error Boundary
-- ❌ ยังไม่ได้ Optimize SEO เต็มรูปแบบ
 
 ---
 
