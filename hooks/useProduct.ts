@@ -5,11 +5,14 @@ import { useEffect, useState, useRef } from "react";
 
 export function useProductById(id: string | undefined) {
   const [product, setProduct] = useState<Product | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!id) return;
+    if (!id) {
+      setLoading(false);
+      return;
+    }
 
     async function fetchProductById() {
       try {
@@ -54,12 +57,13 @@ export function useProducts(search: string) {
 
   useEffect(() => {
     const controller = new AbortController();
+    let cancelled = false;
 
     async function fetchProducts() {
       try {
         setError(null);
 
-        const key = search || "all"; 
+        const key = search || "all";
 
         if (cacheRef.current[key]) {
           setProduct(cacheRef.current[key]);
@@ -86,7 +90,6 @@ export function useProducts(search: string) {
         cacheRef.current[key] = products;
 
         setProduct(products);
-
       } catch (err: unknown) {
         if ((err as any).name === "AbortError") return;
 
@@ -96,14 +99,15 @@ export function useProducts(search: string) {
           setError("Unknown error");
         }
       } finally {
-        setLoading(false);
+        if (!cancelled) setLoading(false);
       }
     }
 
     fetchProducts();
 
-    return () => controller.abort();
-
+    return () => {
+      cancelled = true;
+      controller.abort()};
   }, [search]);
 
   return { product, loading, error };
