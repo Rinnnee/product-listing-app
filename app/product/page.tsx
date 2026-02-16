@@ -12,7 +12,7 @@ import EmptyState from "@/components/EmptyState"
 
 export default function ProductsList() {
     const [search, setSearch] = useState("")
-    const debouncedSearch = useDebounce(search, 100)
+    const debouncedSearch = useDebounce(search, 500)
     const { product, loading } = useProducts(debouncedSearch)
 
     return (
